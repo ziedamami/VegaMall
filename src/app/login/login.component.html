@@ -1,0 +1,48 @@
+  <
+  <!-- Default form login -->
+
+  <form class="text-center border border-light p-5"  [formGroup]="messageForm" (ngSubmit)="onSubmit()">
+
+    <p class="h4 mb-4">Sign in</p>
+
+    <!-- UserName -->
+    <label>
+      Login:
+    <input type="text" formControlName="name" class="form-control mb-4" placeholder="UserName">
+    <div *ngIf="submitted && messageForm.controls.name.errors" class="error">
+      <div *ngIf="messageForm.controls.name.errors.required">Login is required</div>
+    </div>
+  </label>
+  <br>
+
+  <!-- Password -->
+  <label>
+    Password:
+    <input type="password" formControlName="message" class="form-control mb-4" placeholder="Password">
+    <div *ngIf="submitted && messageForm.controls.message.errors" class="error">
+      <div *ngIf="messageForm.controls.message.errors.required">Password is required</div>
+    </div>
+  </label>
+<br>
+    <div class="d-flex justify-content-around">
+      <div>
+        <!-- Forgot password -->
+        <a href="">Forgot password?</a>
+      </div>
+    </div>
+    <h5 *ngIf="success && Result.result==-1"> {{ Result.errorDescription }}</h5>
+
+    <!-- Sign in button -->
+    <button value="Se Connecter"  block="true" class="my-4" type="submit" >Sign in</button>
+
+    <!-- Register -->
+    <p>Not a member?
+      <a href="">Register</a>
+    </p>
+
+    <!-- Social login -->
+    <p>or sign in with:</p>
+
+  </form>
+
+  <!-- Default form login -->

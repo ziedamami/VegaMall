@@ -1,0 +1,345 @@
+
+<div class="wrapper">
+  <div class="sidebar" data-color="danger" data-background-color="white" data-image="./assets/img/sidebar-1.jpg">
+      <app-sidebar></app-sidebar>
+      <div class="sidebar-background" style="background-image: url(./assets/img/sidebar-4.jpg)"></div>
+  </div>
+  <div class="main-panel">
+      <app-navbar></app-navbar>
+      <br>
+      <br>
+     
+           
+      
+        <mat-horizontal-stepper [linear]="isLinear" #stepper>
+          <mat-step [stepControl]="firstFormGroup">
+            <form [formGroup]="firstFormGroup">
+              <ng-template matStepLabel>Choisir une Catégorie</ng-template>
+            
+              <span id="selector" >
+                  <form id="typeForm">
+                <div class="prompt" id="selectProduct"></div>
+                <div id="category"  class="selectcat"><a *ngFor="let cate of Category"  (click)="showsubCategory(cate.categoryid)">{{cate.name}}</a></div>
+                <div id="subcategory"class="selectcat"><a *ngFor="let Subcate of SubCategory" (click)="GetSelectedCategoryId(Subcate.categoryid)">{{Subcate.name}}</a></div>
+                
+                
+
+                    <div id="type"></div>
+                </form>
+                
+                </span>
+              
+              <div>
+                <button mat-button matStepperNext *ngIf="clickedID">Suivant</button>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step [stepControl]="secondFormGroup">
+            <form [formGroup]="secondFormGroup">
+              <ng-template matStepLabel>Informations Generales Du Produit </ng-template>
+             
+              <div class="container-fluid">
+                  <div>
+                      
+                          <div class="card">
+                              <div class="card-header card-header-danger">
+                                  <h4 class="card-title">Ajouter un Produit</h4>
+                                  <p class="card-category">Completez les champs</p>
+                              </div>
+      
+                              <div class="card-body">
+                                      <div class="row">
+                                          <div class="col-md-6">
+      
+                                              <input matInput placeholder="Nom du produit" type="text" formControlName="name">
+                                              
+      
+                                          </div>
+      
+                                      </div>
+                                      <br>
+                                      <div class="row">
+                                          <div class="col-md-6">
+                                              <input matInput placeholder="Reference" type="text"
+                                                  formControlName="reference">
+                                              
+      
+                                          </div>
+      
+                                      </div>
+                                      <br>
+      
+                                      <div class="row">
+                                          <div class="col-md-12">
+                                              
+                                              <textarea matInput placeholder="Description" type="file"
+                                                  formControlName="description"></textarea>
+                                              
+                                          </div>
+                                      </div>
+                                      <br>
+      
+                                      <div class="row">
+                                          <div class="col-md-4">
+                                              <input matInput placeholder="Prix HT" type="text" formControlName="priceht">
+                                             
+                                          </div>
+      
+                                          <div class="col-md-4">
+                                              <input matInput placeholder="Prix Public" type="text" formControlName="publicprice">
+                                             
+      
+                                          </div>
+                                          <div class="col-md-4">
+      
+                                              <input matInput placeholder="Prix Convention" type="text" formControlName="conventionprice">
+                                              
+                                          </div>
+                                      </div>
+                                      <br>
+                                      <div class="row">
+                                          
+                                            Livraison  :
+                                              <input value ="1" type="radio"  name="withdelivery" formControlName="withdelivery" > oui
+                                              <input value ="0" type="radio"  name="withdelivery" formControlName="withdelivery"> non
+                                          
+                                          
+                                          
+                                          
+                                      </div>
+                                      <br>
+                                      <div class="row">
+                                          
+                                          
+                                          <div class="col-md-4">
+                                              <input matInput placeholder="Frais de Livraison" type="text"  formControlName="deliveryfees">
+                                             
+      
+                                          </div>
+                                          
+                                      </div>
+                                      <br>
+                                      <div class="row">
+                                          <div class="col-md-4">
+                                              <input matInput placeholder="Poids" type="text" formControlName="weight">
+                                             
+                                          </div>
+      
+                                          <div class="col-md-4">
+                                              <input matInput placeholder="longueur" type="text" formControlName="length">
+                                             
+      
+                                          </div>
+                                          <div class="col-md-4">
+      
+                                              <input matInput placeholder="Hauteur" type="text" formControlName="height">
+                                              
+                                          </div>
+                                      </div>
+                                      <br>
+                                      <div class="row">
+                                          <div class="col-md-4">
+                                              <input matInput placeholder="Nombre d'unité" type="text" formControlName="stock">
+                                             
+                                          </div>
+      
+                                          <div class="col-md-4">
+                                              <input matInput placeholder="Numero de Serie" type="text" formControlName="sn">
+                                             
+      
+                                          </div>
+                                          <div class="col-md-4">
+      
+                                              <input matInput placeholder="SKU" type="text" formControlName="sku">
+                                              
+                                          </div>
+                                      </div>
+                                      <br>
+                                      <div class="row">
+                                          <div class="col-md-4">
+                                              <label style="color: black" for="exampleFormControlSelect1">Selectionnez une
+                                                  Marque: </label>
+                                              <select class="form-control form-control-sm" formControlName="brand" required
+                                                  >
+                                                  <option selected *ngFor="let brand of Brand"
+                                                      [ngValue]="brand" >
+                                                      {{brand.name}}
+                                                  </option>
+                                              </select>
+                                                                                          
+                                          </div>
+                                          <br>      
+                                          <div class="col-md-4">
+                                              Produit en promotion :
+                                              <input value ="1" type="radio"  name="ispromotion" formControlName="ispromotion"> oui
+                                              <input value ="0" type="radio"  name="ispromotion" formControlName="ispromotion"> non                                             
+      
+                                          </div>
+                                          <div class="col-md-4">
+      
+                                              Nouveau Produit  :
+                                              <input value ="1" type="radio"  name="isnew" formControlName="isnew"> oui
+                                              <input value ="0" type="radio"  name="isnew" formControlName="isnew"> non                                                 
+                                          </div>
+                                      </div>
+                                      <br>
+                                      <div class="row">
+                                          <div class="col-md-12">
+                                              <label style="color: black" for="exampleFormControlSelect1">Année de
+                                                  Garantie: </label>
+                                              <select class="form-control form-control-sm" formControlName="waranty" required
+                                                  >
+                                                  <option selected value="1" >1 an</option>
+                                                  <option selected value="2" >2 ans</option> 
+                                                  <option selected value="3" >3ans</option>
+                                                  <option selected value="5" >5 ans</option>
+                                                  <option selected value="10" >10 ans</option>  
+                                                  
+                                              </select>
+                                              
+                                              
+                                          </div>
+                                          <div class="col-md-4">
+                                            <label style="color: black" for="exampleFormControlSelect1">Selectionnez une
+                                                Taxe: </label>
+                                            <select class="form-control form-control-sm" formControlName="vat" required
+                                                >
+                                                <option selected *ngFor="let vat of Vat"
+                                                     [ngValue]="vat">
+                                                    {{vat.name}}
+                                                </option>
+                                            </select>
+                                                                                        
+                                        </div>
+                                      </div>
+                                      <br>
+                                      <button mat-button matStepperNext type="submit" class="btn btn-danger pull-right"  (click)="addProduct();showProductCharacteristic();">Ajouter
+                                          Produit</button>
+                                      <div class="clearfix"></div>
+                                  
+                                  <div >
+                                      <div>
+                                         
+                                      </div>
+                                  </div>
+                              </div>
+                          
+                      </div>
+      
+                      
+                  </div>
+      
+      
+      
+      
+      
+      
+              </div>
+                
+
+             
+              <div>
+                <button mat-button matStepperPrevious>Back</button>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step [stepControl]="ThirdFormGroup">
+                <form [formGroup]="ThirdFormGroup">
+                  <ng-template matStepLabel>Caractéristiques Du Produit </ng-template>
+                 
+                  <div class="container-fluid">
+                      <div>
+                          
+                              <div class="card">
+                                  <div class="card-header card-header-danger">
+                                      <h4 class="card-title">Ajouter les Caractéristiques du  Produit</h4>
+                                      <p class="card-category">Completez les champs</p>
+                                  </div>
+
+                                  <div class="card-body" >
+                                          <div class="row"*ngFor="let char of Char">
+                                              <div class="col-md-6">
+                                                <label >{{char.name}} :</label>
+                                                
+                                                <select id="{{char.charid}}" class="form-control form-control-sm" *ngFor="let value of char.characteristicValueCollection"formControlName="item" >
+                                                        <option *ngFor="let item of value.name.split(',')" [ngValue]="item" >{{item}} </option>
+
+                                                
+                                                
+                                            </select>
+          
+                                              </div>
+          
+                                          </div>
+                                          <br>
+                                          
+                                          <button mat-button matStepperNext type="submit" class="btn btn-danger pull-right"(click)="addProductCharacterstiic()">Enregistrer
+                                              
+                                        </button>
+                                          <div class="clearfix"></div>
+                                      
+                                      <div >
+                                          <div>
+                                             
+                                          </div>
+                                      </div>
+                                  </div>
+                              
+                          </div>
+          
+                          
+                      </div>
+          
+          
+          
+          
+          
+          
+                  </div>
+                    
+    
+                 
+                  <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                  </div>
+                </form>
+              </mat-step>
+          <mat-step>
+                <ng-template matStepLabel>Ajouter Des Images</ng-template>
+                Veuillez selectionner des images
+
+                <div>
+                        <div *ngIf="currentFileUpload" class="progress">
+                        <div class="progress-bar progress-bar-info progress-bar-striped"
+                          role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+                          aria-valuemin="0" aria-valuemax="100"
+                          [ngStyle]="{width:progress.percentage+'%'}">
+                          {{progress.percentage}}%</div>
+                      </div>
+                       
+                      <label class="btn btn-default">
+                        <input type="file" (change)="selectFile($event)">
+                      </label>
+                       
+                      <button class="btn btn-success" [disabled]="!selectedFiles"
+                        (click)="upload()">Upload</button>
+                  <button mat-button matStepperPrevious mat-fab color="primary">Back</button>
+                  <button mat-button (click)="stepper.reset()">Reset</button>
+                </div>
+              </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+            You are now done.
+            <div>
+              <button mat-button matStepperPrevious mat-fab color="primary">Back</button>
+              <button mat-button (click)="stepper.reset()">Reset</button>
+            </div>
+          </mat-step>
+        </mat-horizontal-stepper>
+        
+      <router-outlet></router-outlet>
+      
+  </div>
+  
+</div>
+

@@ -1,0 +1,162 @@
+<div class="wrapper">
+    <div class="sidebar" data-color="danger" data-background-color="white" data-image="./assets/img/sidebar-1.jpg">
+        <app-sidebar></app-sidebar>
+        <div class="sidebar-background" style="background-image: url(./assets/img/sidebar-4.jpg)"></div>
+    </div>
+
+    <div class="main-panel">
+        <app-navbar></app-navbar>
+        <br>
+        <br>
+
+
+
+
+        <div class="row">
+            <div class="col-md-6">
+
+
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Ajouter une fonctionnalite</h4>
+                        <p class="card-category">Completez les champs</p>
+                    </div>
+
+                    <div class="card-body">
+                        <form [formGroup]="FormFonc" (ngSubmit)="onSubmit()">
+
+                            <mat-form-field color="accent">
+                                <input matInput placeholder="code" type="text" formControlName="code">
+                                <mat-error *ngIf="submited && FormFonc.controls.code.errors.required">Champs
+                                    obligatoire</mat-error>
+
+                            </mat-form-field>
+                            <mat-form-field color="accent">
+                                <input matInput placeholder="libelle" type="text" formControlName="libelle">
+                                <mat-error *ngIf="submited && FormFonc.controls.libelle.errors.required">Champs
+                                    obligatoire</mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field color="accent">
+                                <input matInput placeholder="url" type="text" formControlName="url">
+                                <mat-error *ngIf="submited && FormFonc.controls.url.errors.required">Champs
+                                    obligatoire</mat-error>
+                            </mat-form-field>
+                            <label style="color: black" for="exampleFormControlSelect1">Selectionnez une fonctionnalite
+                                parent
+                            </label>
+                            <select class="browser-default custom-select"
+                                placeholder="Selectionnez une fonctionnalite parent" formControlName="fpere"
+                                *ngIf="fonc">
+
+                                <option selected *ngFor="let fonctionnalite of fonc" [ngValue]="fonctionnalite">
+                                    {{fonctionnalite.libelle}}
+                                </option>
+                            </select>
+
+
+
+                            <input matInput placeholder="icone" type="text" formControlName="icone">
+                            <div *ngIf="submitted && FormFonc.controls.icone.errors" class="error">
+                                <div *ngIf="FormFonc.controls.icone.errors.required">Champs
+                                    obligatoire</div>
+
+                            </div>
+
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Ajouter
+                                Fonctionnalite</button>
+                            <div class="clearfix"></div>
+                            <div *ngIf="Result.result==-1">
+                                <h2 style="color: red"> Duplication du code</h2>
+                            </div>
+                        </form>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+
+            <div class="col-md-6">
+
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Liste des fonctionnalites</h4>
+                    </div>
+                    <div class="card-body">
+
+                        <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+                            <!-- This is the tree node template for leaf nodes -->
+                            <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+                                <!-- use a disabled button to provide padding for tree leaf -->
+                                <button mat-icon-button disabled></button>
+                                {{node.libelle}}
+                            </mat-tree-node>
+                            <!-- This is the tree node template for expandable nodes -->
+                            <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+                                <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.libelle">
+                                    <mat-icon class="mat-icon-rtl-mirror">
+                                        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                                    </mat-icon>
+                                </button>
+                                {{node.libelle}}
+                            </mat-tree-node>
+                        </mat-tree>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+
+
+
+<div class="row">
+        <div class="col-md-6">
+
+            <div class="card">
+                <div class="card-header card-header-danger">
+                    <h4 class="card-title">Liste des utilisateurs</h4>
+                </div>
+                <div class="card-body">
+
+                    <mat-vertical-stepper >
+                        <mat-step *ngFor="let row of user" label="{{row.fname}} {{row.lname}}">
+                            <mat-list >
+                                <div *ngFor="let row1 of row.profile">
+                                <mat-list-item >
+                                    {{row1.designation}}
+                                </mat-list-item>
+                                <mat-divider></mat-divider>
+                            </div>
+                            <button>ajouter un nouveau profile</button>
+                              </mat-list>
+                        </mat-step>
+                       
+                      </mat-vertical-stepper>
+
+                 </div>
+            </div>
+        </div>            
+</div>
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+</div>

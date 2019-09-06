@@ -1,0 +1,109 @@
+<div class="wrapper">
+  <div class="sidebar" data-color="danger" data-background-color="white" data-image="./assets/img/sidebar-1.jpg">
+      <app-sidebar></app-sidebar>
+      <div class="sidebar-background" style="background-image: url(./assets/img/sidebar-4.jpg)"></div>
+  </div>
+  <div class="main-panel">
+      <app-navbar></app-navbar>
+      <br>
+      <br>
+     <br>
+
+     <div class="card">
+      <div class="card-header card-header-danger">
+          <h4 class="card-title ">Liste de tous les profiles</h4>
+
+      </div>
+     
+          <div class="card-body">
+      <div >
+      
+        <div class="form">
+          <mat-form-field floatPlaceholder="never" color="accent">
+            <input matInput #filter placeholder="Filter issues">
+          </mat-form-field>
+         
+        </div>
+      
+        <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
+          ng update @angular/cli @angular/core
+          <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+      
+          <!-- ID Column -->
+          <ng-container matColumnDef="profileId">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
+            <mat-cell *matCellDef="let row" >{{row.profileId}}</mat-cell>
+          </ng-container>
+      
+          <ng-container matColumnDef="code">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>code</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.code}}</mat-cell>
+          </ng-container>
+      
+          <ng-container matColumnDef="designation">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>designation            </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.designation}}</mat-cell>
+          </ng-container>
+      
+          <ng-container matColumnDef="isdeleted">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Isdeleted</mat-header-cell>
+           
+            
+        </ng-container>
+          <ng-container matColumnDef="isactive">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>isdeleted</mat-header-cell>
+            <mat-cell *matCellDef="let row"> 
+              <div *ngIf="row.isactive==1">
+               <h6 style="color: red">Oui</h6>
+              </div>
+
+              <div *ngIf="row.isactive==0">
+                Non
+              </div>
+            </mat-cell>
+            
+          </ng-container>
+      
+         
+          <!-- actions -->
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>
+              <button mat-icon-button color="primary" (click)="addNew()">
+                <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+              </button>
+            </mat-header-cell>
+      
+            <mat-cell *matCellDef="let row; let i=index;">
+              <button mat-icon-button color="accent" (click)="startEdit(i, row.profileId, row.code, row.designation)">
+                <mat-icon aria-label="Edit">edit</mat-icon>
+              </button>
+
+              <button mat-icon-button color="accent" (click)="deleteItem(ii, row.profileId, row.code, row.designation,row.isactive)">
+                <mat-icon aria-label="Delete">delete</mat-icon>
+              </button>
+         </mat-cell>
+          </ng-container>
+
+        
+      
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      
+      
+        <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
+          No results
+        </div>
+      
+        <mat-paginator #paginator
+                       [length]="dataSource.filteredData.length"
+                       [pageIndex]="0"
+                       [pageSize]="10"
+                       [pageSizeOptions]="[5, 10, 25, 100]">
+        </mat-paginator>
+        
+      </div>
+      </div>
+      </div>
+      

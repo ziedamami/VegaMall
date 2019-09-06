@@ -1,0 +1,47 @@
+#info { display: none }
+
+.selectcat {
+    outline: 1px dotted #555;
+    background: #eee;
+    margin: 5px 2px;
+    padding: 2px 5px;
+    width: 200px;
+    float: left;
+    height: 250px;
+    overflow: auto;
+}
+
+span,
+a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    padding: 2px;
+}
+
+a:hover { color: blue; }
+
+.hilite {
+    background: #fff;
+    outline: 1px dotted;
+}
+
+.prompt {
+    position: absolute;
+    z-index: 3;
+    width: 200px;
+    height: 150px;
+    background: #eee;
+    margin: 0;
+    left: 10px;
+    top: 10px;
+    display: none;
+}
+
+#selector {
+    background: none repeat scroll 0 0 transparent;
+    outline: medium none;
+    overflow: hidden;
+    position: relative;
+    width: 880px;
+}
